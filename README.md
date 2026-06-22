@@ -1,32 +1,25 @@
-# ARC1 Recommendation Engine Documentation (Public)
+# ARC1 — Public Project Documentation
 
-**ARC1** is a research and engineering project exploring scalable recommendation systems for movies, anime and music.  The core implementation lives in a private repository; this public repository hosts the high‑level documentation, design notes and evaluation plans for the platform.  It does **not** contain production source code or a working backend.
+This repository contains public documentation for **ARC1**, a privately maintained content‑discovery project for movies, anime and music.  It intentionally does **not** include the executable backend or frontend source code – those implementation details live in private repositories.  The materials here are meant to share high‑level context about the project and may evolve as the system matures.
 
 ## Purpose
 
-The goal of ARC1 is to build a personalised content discovery service leveraging:
-
-* **Backend APIs and data services** — exploring modular service patterns with FastAPI, SQL/NoSQL storage and messaging.  Our private codebase includes endpoints for authentication, content ingestion, recommendations and monitoring.  Only design overviews are provided here.
-* **Recommendation algorithms** — combining collaborative filtering, content embeddings and rule‑based heuristics.  The `docs/` folder summarises planned algorithms and evaluation metrics; implementation details are private.
-* **Review and evaluation processes** — developing offline metrics and human‑in‑the‑loop workflows to assess model changes.  The conceptual plan is captured in `docs/REVIEWOPS.md`.
+The goal of ARC1 is to explore personalised recommendation and discovery experiences for audiovisual entertainment.  To support transparency and community engagement without exposing proprietary code, this repository provides an overview of the project’s research direction and evaluation approach.
 
 ## What’s in this repository
 
 | Folder | Contents |
-|-------|---------|
-| `docs/` | Conceptual documentation, including architecture diagrams, proposed API specifications, benchmarking methodology and review process notes. |
-| `.env.example` | Sample environment variables illustrating what the private implementation uses (e.g. database connection URIs, JWT secrets). |
-| `.github/` | Community health files (code of conduct, issue templates) and CI configuration for documentation checks. |
+| --- | --- |
+| `docs/` | Conceptual documentation, including architecture diagrams, proposed API interfaces, benchmarking methodology and review‑process notes. |
+| `.env.example` | Sample environment variables illustrating what the private implementation uses (e.g., database connection URIs, JWT secrets). |
+| `.github/` | Community health files (code of conduct and contributing guidelines) and CI configuration for documentation checks. |
 
-## What’s not in this repository
+## What’s *not* included
 
-* No implementation code for the backend or frontend.  The working services, databases, migrations and tests are maintained in private repositories.
-* No production‑ready recommendation models or datasets.  The benchmarking figures in the documentation are illustrative and subject to change once the system is validated.
+- No executable backend or frontend source code, algorithms or models.
+- No production datasets, migration scripts or runtime configurations.
+- No private evaluation reports or proprietary benchmarks.
 
-## Roadmap
+## Evolving documentation
 
-We aim to open source more of ARC1 in the future as the project matures.  In the meantime, this repository will be updated as design decisions evolve.  See the `docs/` directory for the latest conceptual artifacts.  Last updated: **22 June 2026**.
-
-## Contributing and feedback
-
-Because the implementation is private, we are not accepting code contributions via this repository.  If you have questions or suggestions about the documentation, feel free to open an issue or reach out via email.
+These public materials are a snapshot of the project’s current documentation.  As ARC1 evolves, design notes and evaluation methodologies may change.  Feel free to open an issue or discussion if you have questions about the public documentation.

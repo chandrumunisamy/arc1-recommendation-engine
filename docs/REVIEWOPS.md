@@ -1,54 +1,41 @@
-# ReviewOps Workflow
+# ReviewOps Plan (Conceptual)
 
-The ARC1 Recommendation Engine implements a ReviewOps (Review Operations) workflow to ensure any changes to the recommendation logic are thoroughly evaluated and documented before deployment. This process balances innovation with stability and safeguards the user experience.
+This document outlines a conceptual ReviewOps (Review Operations) process for the ARC1 recommendation engine. No production ReviewOps workflow exists today. This plan serves as a roadmap for how algorithm changes might be evaluated in the future.
 
-## Goals
-- Establish baseline performance metrics that any new algorithm must meet or exceed.
-- Provide a repeatable process for introducing new recommendation strategies or data sources.
-- Promote transparency by logging all experiments and evaluation results.
+## Objective
 
-## Steps
+To provide a structured, human-in-the-loop process for proposing, evaluating, and integrating new recommendation algorithms while maintaining transparency and user experience.
 
-1. **Define the baseline**  
-   - Use existing production algorithm or a simple heuristic (e.g., global average rating) as the trust ‑floor baseline.  
-   - Compute baseline metrics such as mean reciprocal rank (MRR), hit rate @K, and diversity.
+## Proposed Workflow
 
-2. **Propose a new algorithm**  
-   - Describe the change (e.g., new content ‑based similarity, collaborative filtering, hybrid approach, or model hyper‑parameters).  
-   - Prepare the algorithm code and configuration in a feature branch or experiment script.
+1. **Establish baseline**  
+   - Identify baseline metrics for the current algorithm (e.g., MRR, precision@K, recall@K, nDCG, coverage, novelty).  
+   - Document the baseline performance using offline evaluation on a representative dataset.
 
-3. **Offline evaluation**  
-   - Split historical interaction data into train, validation and test sets.  
-   - Evaluate the new algorithm against the baseline using offline metrics (MRR, precision@K, recall@K, NDCG, diversity and novelty).  
-   - Record results in a `benchmarks/` directory or a tracking system.
+2. **Submit proposal**  
+   - Contributors document the rationale for a new algorithm or modification, including expected benefits and any required data/model changes.  
+   - Provide a plan for offline experiments and the metrics to be evaluated.
 
-4. **Trust ‑floor comparison**  
-   - Compare the new algorithm’s metrics with the trust ‑floor baseline.  
-   - Reject the change if it performs worse on critical metrics such as relevance or fairness.
+3. **Offline experimentation**  
+   - Run experiments on historical data using the proposed algorithm.  
+   - Compare results against baseline metrics.  
+   - Record findings in a report.
 
-5. **A/B testing (optional)**  
-   - If offline metrics are promising, deploy the new algorithm to a subset of users via feature flags.  
-   - Collect online metrics such as click ‑through rate, dwell time and session depth.  
-   - Monitor fairness metrics to ensure recommendations do not disproportionately favour certain items or users.
+4. **Review and feedback**  
+   - A review committee (faculty mentors, project maintainers) evaluates the experiment report.  
+   - Reviewers consider performance trade-offs, fairness, diversity, computational cost, and maintainability.  
+   - Provide feedback and decide whether to proceed to live testing.
 
-6. **Logging and documentation**  
-   - Document the experiment details, evaluation results and decisions in the `docs/BENCHMARKS.md` file or an experiment log.  
-   - Attach plots or tables summarising performance.  
-   - Update the project roadmap and issue tracker with next steps.
+5. **Live testing (future)**  
+   - If offline results are promising, conduct A/B or multivariate tests on a small user cohort.  
+   - Monitor key user engagement metrics and compute statistical significance.  
+   - Document results.
 
-7. **Deployment**  
-   - If the new algorithm meets or exceeds the trust ‑floor baseline and passes A/B testing, merge the feature branch into `main`.  
-   - Deploy using the CI/CD pipeline and monitor system health.
+6. **Decision and documentation**  
+   - Based on offline and live test results, decide whether to integrate the new algorithm into the main branch.  
+   - Update documentation and maintain version history of algorithm changes.
 
-## Logging guidelines
-- Store raw experiment data and results in a version‑controlled `benchmarks/` directory.  
-- Use descriptive commit messages and pull requests to capture context.  
-- Include links to Jupyter notebooks or scripts used for evaluation.
+## Status (as of June 22, 2026)
 
-## Fairness and bias
-ReviewOps must consider fairness and bias. When evaluating new algorithms:
-- Check metrics disaggregated by user segments (e.g., demographic groups) if applicable.  
-- Use fairness metrics such as demographic parity or equality of opportunity when relevant.  
-- Avoid recommendations that reinforce harmful biases.
-
-By following this ReviewOps workflow, ARC1 maintains a robust and transparent development process that balances rapid iteration with careful evaluation.
+- No ReviewOps infrastructure is implemented. The ARC1 repository currently contains only design documentation.  
+- This plan is aspirational and subject to change once code and data become available.

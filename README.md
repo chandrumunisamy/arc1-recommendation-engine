@@ -1,36 +1,32 @@
-# ARC1 Recommendation Engine
+# ARC1 Recommendation Engine Documentation (Public)
 
-**ARC1** is an early‑stage open source project to design and build a personalised recommendation service.  The goal is to explore scalable backend patterns, data ingestion and applied machine learning to surface relevant movies, anime and music.  At this stage the repository mainly contains planning documents and architecture notes.
+**ARC1** is a research and engineering project exploring scalable recommendation systems for movies, anime and music.  The core implementation lives in a private repository; this public repository hosts the high‑level documentation, design notes and evaluation plans for the platform.  It does **not** contain production source code or a working backend.
 
-## Background and Motivation
+## Purpose
 
-Modern recommendation systems combine collaborative filtering, content features and reinforcement learning to deliver meaningful suggestions.  ARC1 aims to provide a reproducible template for experimenting with these ideas in a service‑oriented backend.  The project grew out of coursework and hackathon work during my AI & Data Science programme and is still in a design phase.
+The goal of ARC1 is to build a personalised content discovery service leveraging:
 
-## Project Scope
+* **Backend APIs and data services** — exploring modular service patterns with FastAPI, SQL/NoSQL storage and messaging.  Our private codebase includes endpoints for authentication, content ingestion, recommendations and monitoring.  Only design overviews are provided here.
+* **Recommendation algorithms** — combining collaborative filtering, content embeddings and rule‑based heuristics.  The `docs/` folder summarises planned algorithms and evaluation metrics; implementation details are private.
+* **Review and evaluation processes** — developing offline metrics and human‑in‑the‑loop workflows to assess model changes.  The conceptual plan is captured in `docs/REVIEWOPS.md`.
 
-The ARC1 repository currently contains:
+## What’s in this repository
 
-- **Design documentation** – Markdown files in [`docs/`](docs) outline proposed APIs, recommendation algorithms, benchmarking metrics and review workflows.  They are intended as a starting point for future implementation.
-- **Configuration samples** – `.env.example` shows environment variables such as database connection strings, JWT secrets and message‑queue endpoints.  These are examples only; no services connect to them yet.
-- **High‑level architecture diagrams** – Files in `docs/ARCHITECTURE.md` and related diagrams describe a microservices layout for ingestion, authentication, recommendation and review.
+| Folder | Contents |
+|-------|---------|
+| `docs/` | Conceptual documentation, including architecture diagrams, proposed API specifications, benchmarking methodology and review process notes. |
+| `.env.example` | Sample environment variables illustrating what the private implementation uses (e.g. database connection URIs, JWT secrets). |
+| `.github/` | Community health files (code of conduct, issue templates) and CI configuration for documentation checks. |
 
-What the repository does **not** include today:
+## What’s not in this repository
 
-- ✅  No executable backend code or API endpoints.  The `src/` directory mentioned in the design docs has not been created yet.
-- ✅  No production system, database migrations or continuous integration pipelines.  Benchmark results are illustrative and not backed by running code.
+* No implementation code for the backend or frontend.  The working services, databases, migrations and tests are maintained in private repositories.
+* No production‑ready recommendation models or datasets.  The benchmarking figures in the documentation are illustrative and subject to change once the system is validated.
 
 ## Roadmap
 
-Below are the proposed milestones for ARC1.  These are aspirational and may evolve based on time and resources:
+We aim to open source more of ARC1 in the future as the project matures.  In the meantime, this repository will be updated as design decisions evolve.  See the `docs/` directory for the latest conceptual artifacts.  Last updated: **22 June 2026**.
 
-1. **Create a minimal service skeleton** – set up a Python project with a FastAPI app, SQLAlchemy models and basic user CRUD endpoints.
-2. **Implement baseline recommenders** – start with simple collaborative filtering on dummy data to test the architecture.
-3. **Ingest real datasets** – build a small‑scale ingestion pipeline to load movie, anime and music metadata into a database or data lake for experimentation.
-4. **Add evaluation and review operations** – integrate human‑in‑the‑loop review of recommendations and track metrics like coverage, diversity and nDCG.
-5. **Scale and optimise** – explore microservices deployment with Kubernetes and message queues to handle higher loads.
+## Contributing and feedback
 
-Contributions are welcome, but please note that the project is not yet ready for production use.  If you are interested in collaborating or want to discuss the design, feel free to open an issue.
-
----
-
-*This README reflects the current state of the project as of June 2026.  The documentation will be updated as development progresses.*
+Because the implementation is private, we are not accepting code contributions via this repository.  If you have questions or suggestions about the documentation, feel free to open an issue or reach out via email.

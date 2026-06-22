@@ -1,134 +1,43 @@
-# API Reference
+# API Overview
 
-This document provides an overview of the primary REST endpoints exposed by the ARC1 Recommendation Engine. All endpoints are versioned under `/api/v1` and return JSON responses.
+This document outlines the **proposed** REST endpoints for the ARC1 Recommendation Engine.  These endpoints are conceptual only – there is no running service yet.  They are intended to guide future implementation and may change as the project evolves.
 
-## Authentication
+## User authentication
 
-### Register a new user
+### Register a user
 
 `POST /api/v1/auth/register`
 
-Registers a new user with email and password.
-
-**Request body**
-```json
-{
-  "email": "user@example.com",
-  "password": "strongpassword",
-  "name": "Jane Doe"
-}
-```
-
-**Response**
-```json
-{
-  "id": "user_uuid",
-  "email": "user@example.com",
-  "token": "jwt_token"
-}
-```
+Accepts a JSON body with `email`, `password` and optional profile details.  Returns a placeholder user identifier and JWT token in the response.  This endpoint is not yet implemented.
 
 ### Login
 
 `POST /api/v1/auth/login`
 
-Authenticates a user and returns a JWT access token.
+Accepts `email` and `password` and returns a JWT token if credentials are valid.  This is a proposed design; no authentication service exists yet.
 
-**Request body**
-```json
-{
-  "email": "user@example.com",
-  "password": "strongpassword"
-}
-```
+## Content catalog
 
-**Response**
-```json
-{
-  "access_token": "jwt_access_token",
-  "token_type": "bearer"
-}
-```
+### List items
 
-## Content APIs
+`GET /api/v1/items`
 
-### Create an item
+Returns a paginated list of available movies, anime and music for browsing.  The items are currently defined only in documentation.
 
-`POST /api/v1/items`
-
-Creates a new item (e.g., article, product, video) with metadata.
-
-**Request body**
-```json
-{
-  "title": "Example Item",
-  "description": "A short description",
-  "tags": ["sample", "demo"]
-}
-```
-
-**Response**
-```json
-{
-  "id": "item_uuid",
-  "title": "Example Item",
-  "created_at": "2026-06-10T12:00:00Z"
-}
-```
-
-### Retrieve an item
+### Get item details
 
 `GET /api/v1/items/{item_id}`
 
-Returns the item with the given `item_id`.
+Returns metadata for a specific item such as title, genres and description.  Not implemented.
 
-## Ratings APIs
-
-### Add or update a rating
-
-`POST /api/v1/ratings`
-
-Rates an item by a user. If a rating already exists, it will be updated.
-
-**Request body**
-```json
-{
-  "user_id": "user_uuid",
-  "item_id": "item_uuid",
-  "rating": 4.5
-}
-```
-
-## Recommendation Endpoint
+## Recommendations
 
 ### Get recommendations for a user
 
-`GET /api/v1/recommendations/{user_id}`
+`GET /api/v1/users/{user_id}/recommendations`
 
-Returns a ranked list of recommended items for the user. Accepts optional query parameters such as `limit` and `exclude_rated`.
+Returns a list of recommended items for the specified user.  The recommendation logic has not been implemented; this endpoint is a placeholder.
 
-**Example**
-```
-GET /api/v1/recommendations/12345?limit=10&exclude_rated=true
-```
+---
 
-**Response**
-```json
-{
-  "user_id": "12345",
-  "recommendations": [
-    {
-      "item_id": "item_1",
-      "score": 0.95
-    },
-    {
-      "item_id": "item_2",
-      "score": 0.87
-    }
-  ]
-}
-```
-
-## ReviewOps
-
-For details on the human-in-the-loop review process, see `REVIEWOPS.md` in this directory.
+*This API specification reflects the planned interface as of June 2026.  The ARC1 repository contains only documentation at this time; no backend code or endpoints exist.*
